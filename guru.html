@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>Guru - TMI Point</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#eef2f7;
+margin:0;
+padding:20px;
+color:#172033;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:18px;
+border-radius:18px;
+margin-bottom:15px;
+}
+
+input{
+padding:12px;
+border:1px solid #cbd5e1;
+border-radius:10px;
+width:100%;
+box-sizing:border-box;
+margin-bottom:10px;
+}
+
+button{
+padding:10px 14px;
+border:0;
+border-radius:9px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.login{
+background:#2563eb;
+color:white;
+}
+
+.accept{
+background:#16a34a;
+color:white;
+}
+
+.reject{
+background:#dc2626;
+color:white;
+}
+
+.item{
+border:1px solid #e2e8f0;
+padding:15px;
+border-radius:15px;
+margin-top:12px;
+}
+
+.item img{
+max-width:250px;
+max-height:250px;
+border-radius:10px;
+margin:10px 0;
+}
+
+.meta{
+font-size:13px;
+line-height:1.7;
+}
+
+.status{
+font-weight:bold;
+margin:8px 0;
+}
+
+.menunggu{
+color:#b45309;
+}
+
+.diterima{
+color:#15803d;
+}
+
+.ditolak{
+color:#dc2626;
+}
+
+.actions{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h2>
+👨‍🏫 TMI Point - Verifikasi Guru
+</h2>
+
+<input
+id="pin"
+type="password"
+placeholder="PIN Guru">
+
+<button
+class="login"
+onclick="loadData()">
+
+🔐 Masuk
+
+</button>
+
+</div>
+
+
+<div
+id="list">
+</div>
+
+</div>
+
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzyeXOYRKjgDqFSqtZUdZgy9Ohhgs5Oufb40rbNEzgFo8HrRq__QteDdeOHkCw7XE2r/exec";
+
+let teacherPin="";
+
+
+async function loadData(){
+
+teacherPin =
+document.getElementById("pin")
+.value.trim();
+
+
+if(!teacherPin){
+
+alert("Masukkan PIN guru.");
+
+return;
+
+}
+
+
+try{
+
+const response =
+await fetch(
+API_URL+
+"?action=submissions&pin="+
+encodeURIComponent(teacherPin)
+);
+
+
+const result =
+await response.json();
+
+
+if(!result.success){
+
+alert(result.message);
+
+return;
+
+}
+
+
+render(result.data);
+
+
+}
+
+catch(error){
+
+alert(
+"Gagal mengambil data."
+);
+
+}
+
+}
+
+
+function render(data){
+
+const list =
+document.getElementById("list");
+
+list.innerHTML="";
+
+
+if(data.length===0){
+
+list.innerHTML=`
+
+<div class="card">
+
+Belum ada bukti tugas siswa.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+data.reverse();
+
+
+data.forEach(item=>{
+
+const div =
+document.createElement("div");
+
+div.className="item";
+
+
+let statusClass="menunggu";
+
+if(item.status==="DITERIMA")
+statusClass="diterima";
+
+if(item.status==="DITOLAK")
+statusClass="ditolak";
+
+
+div.innerHTML=`
+
+<h3>
+${item.misi}
+</h3>
+
+<div class="meta">
+
+<strong>
+${item.nama}
+</strong>
+
+<br>
+
+Kelas:
+${item.kelas}
+
+<br>
+
+Absen:
+${item.absen}
+
+<br>
+
+Poin:
+${item.poin}
+
+<br>
+
+Tanggal:
+${item.tanggal}
+
+</div>
+
+<div class="status ${statusClass}">
+
+Status:
+${item.status}
+
+</div>
+
+<a
+href="${item.bukti}"
+target="_blank">
+
+📷 Buka Bukti
+
+</a>
+
+<br><br>
+
+<div class="actions">
+
+<button
+class="accept"
+onclick="verify(
+${item.row},
+'DITERIMA'
+)">
+
+✓ TERIMA
+
+</button>
+
+<button
+class="reject"
+onclick="verify(
+${item.row},
+'DITOLAK'
+)">
+
+✕ TOLAK
+
+</button>
+
+</div>
+
+`;
+
+list.appendChild(div);
+
+});
+
+}
+
+
+async function verify(row,status){
+
+let catatan="";
+
+
+if(status==="DITOLAK"){
+
+catatan =
+prompt(
+"Alasan penolakan:"
+) || "";
+
+}
+
+
+if(
+!confirm(
+status==="DITERIMA"
+?
+"Terima bukti ini dan berikan poin?"
+:
+"Tolak bukti ini?"
+)
+){
+
+return;
+
+}
+
+
+try{
+
+const response =
+await fetch(API_URL,{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"text/plain;charset=utf-8"
+},
+
+body:JSON.stringify({
+
+action:"verify",
+
+pin:teacherPin,
+
+row:row,
+
+status:status,
+
+catatan:catatan
+
+})
+
+});
+
+
+const result =
+await response.json();
+
+
+alert(result.message);
+
+
+if(result.success){
+
+loadData();
+
+}
+
+}
+
+catch(error){
+
+alert(
+"Gagal menyimpan verifikasi."
+);
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

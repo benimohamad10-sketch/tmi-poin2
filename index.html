@@ -1,0 +1,3312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TMI Point</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    select {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    #loginPage {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border-radius: 24px;
+      padding: 30px 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.20);
+    }
+
+    .login-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 15px;
+      border-radius: 22px;
+      background: #2563eb;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: bold;
+    }
+
+    .login-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .login-subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-top: 7px;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      outline: none;
+      background: white;
+      font-size: 15px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.10);
+    }
+
+    .btn-primary {
+      width: 100%;
+      border: none;
+      padding: 14px;
+      border-radius: 13px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    .login-info {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #eff6ff;
+      color: #1e40af;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* =========================
+       APP
+    ========================= */
+
+    #appPage {
+      min-height: 100vh;
+      padding-bottom: 85px;
+    }
+
+    .top-header {
+      background: linear-gradient(135deg, #0f172a, #2563eb);
+      color: white;
+      padding: 20px 18px 24px;
+      border-radius: 0 0 25px 25px;
+    }
+
+    .top-header-inner {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 13px;
+      background: rgba(255,255,255,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .brand-text h1 {
+      font-size: 20px;
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      opacity: .75;
+      margin-top: 2px;
+    }
+
+    .header-user {
+      text-align: right;
+    }
+
+    .header-user strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .header-user span {
+      font-size: 11px;
+      opacity: .8;
+    }
+
+    .page-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 18px;
+    }
+
+    /* =========================
+       HOME
+    ========================= */
+
+    .welcome-card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 5px 20px rgba(15,23,42,.06);
+      margin-top: -4px;
+      margin-bottom: 17px;
+    }
+
+    .welcome-card h2 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .welcome-card p {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .class-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 10px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px 12px;
+      box-shadow: 0 5px 20px rgba(15,23,42,.05);
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 21px;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .stat-label {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .level-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 5px 20px rgba(15,23,42,.05);
+      margin-bottom: 17px;
+    }
+
+    .level-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .level-top strong {
+      font-size: 14px;
+    }
+
+    .level-top span {
+      color: #2563eb;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .progress-bg {
+      width: 100%;
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      border-radius: 20px;
+      transition: width .4s;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 22px 0 12px;
+    }
+
+    .section-title h2 {
+      font-size: 18px;
+    }
+
+    .section-title span {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    /* =========================
+       MISSION
+    ========================= */
+
+    .mission-card {
+      background: white;
+      border-radius: 18px;
+      padding: 17px;
+      margin-bottom: 12px;
+      box-shadow: 0 5px 20px rgba(15,23,42,.05);
+      border: 1px solid #eef2f7;
+    }
+
+    .mission-head {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+    }
+
+    .mission-number {
+      min-width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #eff6ff;
+      color: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .mission-content {
+      flex: 1;
+    }
+
+    .mission-content h3 {
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 5px;
+    }
+
+    .mission-content p {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+
+    .point-badge {
+      white-space: nowrap;
+      padding: 6px 9px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .mission-action {
+      margin-top: 14px;
+    }
+
+    .mission-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 11px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .mission-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .mission-btn.disabled {
+      background: #d1d5db;
+      color: #6b7280;
+      cursor: not-allowed;
+    }
+
+    .status-box {
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .status-pending {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .status-approved {
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    .status-rejected {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    /* =========================
+       MATERIAL
+    ========================= */
+
+    .material-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 11px;
+      box-shadow: 0 5px 20px rgba(15,23,42,.05);
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .material-icon {
+      width: 43px;
+      height: 43px;
+      border-radius: 12px;
+      background: #eff6ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+    }
+
+    .material-content {
+      flex: 1;
+    }
+
+    .material-content h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .material-content p {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    /* =========================
+       RANKING
+    ========================= */
+
+    .sync-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .sync-btn {
+      border: none;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .ranking-card {
+      background: white;
+      border-radius: 18px;
+      padding: 17px;
+      margin-bottom: 10px;
+      box-shadow: 0 5px 20px rgba(15,23,42,.05);
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .rank-number {
+      min-width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #374151;
+    }
+
+    .rank-number.top1 {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .rank-number.top2 {
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .rank-number.top3 {
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .rank-user {
+      flex: 1;
+    }
+
+    .rank-user strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .rank-user span {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    .rank-point {
+      font-weight: 800;
+      color: #2563eb;
+      font-size: 14px;
+    }
+
+    .my-ranking {
+      border: 2px solid #2563eb;
+    }
+
+    /* =========================
+       PROFILE
+    ========================= */
+
+    .profile-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px 18px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(15,23,42,.05);
+    }
+
+    .profile-avatar {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 13px;
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .profile-card h2 {
+      font-size: 21px;
+    }
+
+    .profile-card p {
+      color: #6b7280;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .profile-info {
+      text-align: left;
+      margin-top: 22px;
+    }
+
+    .profile-info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid #eef2f7;
+      font-size: 13px;
+    }
+
+    .profile-info-row span:first-child {
+      color: #6b7280;
+    }
+
+    .profile-info-row span:last-child {
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .logout-btn {
+      width: 100%;
+      border: none;
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 13px;
+      border-radius: 12px;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+
+    /* =========================
+       BOTTOM NAV
+    ========================= */
+
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 70px;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: center;
+      z-index: 50;
+      box-shadow: 0 -4px 20px rgba(0,0,0,.05);
+    }
+
+    .bottom-nav-inner {
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .nav-btn {
+      border: none;
+      background: transparent;
+      color: #9ca3af;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .nav-btn .nav-icon {
+      font-size: 21px;
+    }
+
+    .nav-btn.active {
+      color: #2563eb;
+    }
+
+    /* =========================
+       MODAL UPLOAD
+    ========================= */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 100;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      border-radius: 22px;
+      padding: 21px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-header h2 {
+      font-size: 18px;
+    }
+
+    .close-btn {
+      width: 34px;
+      height: 34px;
+      border: none;
+      border-radius: 50%;
+      background: #f3f4f6;
+      color: #374151;
+      font-size: 18px;
+    }
+
+    .upload-area {
+      border: 2px dashed #bfdbfe;
+      border-radius: 15px;
+      padding: 22px 15px;
+      text-align: center;
+      background: #eff6ff;
+    }
+
+    .upload-area-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .upload-area p {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.5;
+      margin-bottom: 13px;
+    }
+
+    .file-label {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #proofFile {
+      display: none;
+    }
+
+    .preview-container {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .preview-container img {
+      max-width: 100%;
+      max-height: 240px;
+      border-radius: 13px;
+      object-fit: contain;
+      border: 1px solid #e5e7eb;
+    }
+
+    .file-info {
+      margin-top: 7px;
+      color: #6b7280;
+      font-size: 11px;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .btn-secondary {
+      border: none;
+      background: #f3f4f6;
+      color: #374151;
+      border-radius: 11px;
+      padding: 12px;
+      font-weight: 700;
+    }
+
+    .btn-submit {
+      border: none;
+      background: #2563eb;
+      color: white;
+      border-radius: 11px;
+      padding: 12px;
+      font-weight: 700;
+    }
+
+    .btn-submit:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: 88px;
+      transform: translateX(-50%) translateY(20px);
+      background: #111827;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 11px;
+      font-size: 12px;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+      max-width: calc(100% - 30px);
+      text-align: center;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =========================
+       LOADING
+    ========================= */
+
+    .loading {
+      text-align: center;
+      padding: 30px 15px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .empty-state {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 17px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 550px) {
+      .stats-grid {
+        gap: 8px;
+      }
+
+      .stat-card {
+        padding: 13px 7px;
+      }
+
+      .stat-value {
+        font-size: 18px;
+      }
+
+      .stat-label {
+        font-size: 10px;
+      }
+
+      .top-header {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .page-container {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .brand-text h1 {
+        font-size: 18px;
+      }
+
+      .header-user {
+        max-width: 125px;
+      }
+
+      .header-user strong {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
+
+<div id="loginPage">
+
+  <div class="login-card">
+
+    <div class="login-logo">
+      TMI
+    </div>
+
+    <div class="login-title">
+      TMI Point
+    </div>
+
+    <div class="login-subtitle">
+      Platform belajar & misi Teknik Mesin Industri
+    </div>
+
+    <div class="form-group">
+      <label for="namaInput">Nama Lengkap</label>
+      <input
+        type="text"
+        id="namaInput"
+        placeholder="Masukkan nama lengkap"
+        autocomplete="name"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="kelasInput">Kelas</label>
+
+      <select id="kelasInput">
+        <option value="">-- Pilih Kelas --</option>
+        <option value="X TMI">X TMI</option>
+        <option value="XI TMI">XI TMI</option>
+        <option value="XII TMI">XII TMI</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="absenInput">Nomor Absen</label>
+      <input
+        type="number"
+        id="absenInput"
+        placeholder="Contoh: 12"
+        min="1"
+      >
+    </div>
+
+    <button
+      class="btn-primary"
+      onclick="mulaiBelajar()"
+    >
+      🚀 Mulai Belajar
+    </button>
+
+    <div class="login-info">
+      Masukkan data sesuai identitas siswa.
+      Data poin akan tersinkron dengan sistem TMI Point.
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     APP PAGE
+===================================================== -->
+
+<div id="appPage" class="hidden">
+
+  <!-- HEADER -->
+
+  <header class="top-header">
+
+    <div class="top-header-inner">
+
+      <div class="header-row">
+
+        <div class="brand">
+
+          <div class="brand-icon">
+            T
+          </div>
+
+          <div class="brand-text">
+            <h1>TMI Point</h1>
+            <p>Teknik Mesin Industri</p>
+          </div>
+
+        </div>
+
+        <div class="header-user">
+
+          <strong id="headerNama">
+            Siswa
+          </strong>
+
+          <span id="headerKelas">
+            TMI
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- CONTENT -->
+
+  <main class="page-container">
+
+    <!-- HOME -->
+
+    <section id="homeSection">
+
+      <div class="welcome-card">
+
+        <h2>
+          Halo, <span id="welcomeNama">Siswa</span>! 👋
+        </h2>
+
+        <p>
+          Yuk selesaikan misi Teknik Mesin Industri dan kumpulkan poinmu.
+        </p>
+
+        <div class="class-badge" id="welcomeKelas">
+          Kelas TMI
+        </div>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            ⭐
+          </div>
+
+          <div class="stat-value" id="totalPoint">
+            0
+          </div>
+
+          <div class="stat-label">
+            Total Poin
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            🎯
+          </div>
+
+          <div class="stat-value" id="missionDone">
+            0
+          </div>
+
+          <div class="stat-label">
+            Misi Selesai
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            🏆
+          </div>
+
+          <div class="stat-value" id="levelSiswa">
+            1
+          </div>
+
+          <div class="stat-label">
+            Level
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="level-card">
+
+        <div class="level-top">
+
+          <strong>
+            Progress Level
+          </strong>
+
+          <span id="levelText">
+            Level 1
+          </span>
+
+        </div>
+
+        <div class="progress-bg">
+
+          <div
+            class="progress-bar"
+            id="levelProgress"
+            style="width:0%"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="section-title">
+
+        <h2>
+          🎯 Misi Terbaru
+        </h2>
+
+        <span id="homeMissionCount">
+          0 misi
+        </span>
+
+      </div>
+
+
+      <div id="homeMissionList">
+      </div>
+
+    </section>
+
+
+    <!-- MISI -->
+
+    <section id="missionSection" class="hidden">
+
+      <div class="section-title">
+
+        <h2>
+          🎯 Semua Misi
+        </h2>
+
+        <span id="missionClassTitle">
+          TMI
+        </span>
+
+      </div>
+
+      <div id="missionList">
+      </div>
+
+    </section>
+
+
+    <!-- MATERI -->
+
+    <section id="materialSection" class="hidden">
+
+      <div class="section-title">
+
+        <h2>
+          📚 Materi Pembelajaran
+        </h2>
+
+        <span id="materialClassTitle">
+          TMI
+        </span>
+
+      </div>
+
+      <div id="materialList">
+      </div>
+
+    </section>
+
+
+    <!-- PRESTASI -->
+
+    <section id="achievementSection" class="hidden">
+
+      <div class="section-title">
+
+        <h2>
+          🏆 Prestasi & Ranking
+        </h2>
+
+        <span>
+          Peringkat
+        </span>
+
+      </div>
+
+      <div class="sync-row">
+
+        <button
+          class="sync-btn"
+          onclick="sinkronkanData(true)"
+        >
+          🔄 Sinkronkan Data
+        </button>
+
+      </div>
+
+      <div id="rankingList">
+      </div>
+
+    </section>
+
+
+    <!-- PROFIL -->
+
+    <section id="profileSection" class="hidden">
+
+      <div class="section-title">
+
+        <h2>
+          👤 Profil Saya
+        </h2>
+
+      </div>
+
+      <div class="profile-card">
+
+        <div
+          class="profile-avatar"
+          id="profileAvatar"
+        >
+          S
+        </div>
+
+        <h2 id="profileNama">
+          Siswa
+        </h2>
+
+        <p id="profileKelas">
+          TMI
+        </p>
+
+
+        <div class="profile-info">
+
+          <div class="profile-info-row">
+
+            <span>
+              Nama
+            </span>
+
+            <span id="profileNamaInfo">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-info-row">
+
+            <span>
+              Kelas
+            </span>
+
+            <span id="profileKelasInfo">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-info-row">
+
+            <span>
+              Nomor Absen
+            </span>
+
+            <span id="profileAbsenInfo">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-info-row">
+
+            <span>
+              Total Poin
+            </span>
+
+            <span id="profilePointInfo">
+              0
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="logout-btn"
+          onclick="logout()"
+        >
+          🚪 Keluar / Ganti Siswa
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- BOTTOM NAV -->
+
+  <nav class="bottom-nav">
+
+    <div class="bottom-nav-inner">
+
+      <button
+        class="nav-btn active"
+        id="navHome"
+        onclick="showSection('home')"
+      >
+        <div class="nav-icon">
+          🏠
+        </div>
+        <span>
+          Beranda
+        </span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        id="navMission"
+        onclick="showSection('mission')"
+      >
+        <div class="nav-icon">
+          🎯
+        </div>
+        <span>
+          Misi
+        </span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        id="navAchievement"
+        onclick="showSection('achievement')"
+      >
+        <div class="nav-icon">
+          🏆
+        </div>
+        <span>
+          Prestasi
+        </span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        id="navProfile"
+        onclick="showSection('profile')"
+      >
+        <div class="nav-icon">
+          👤
+        </div>
+        <span>
+          Profil
+        </span>
+      </button>
+
+    </div>
+
+  </nav>
+
+</div>
+
+
+<!-- =====================================================
+     UPLOAD MODAL
+===================================================== -->
+
+<div
+  id="uploadModal"
+  class="modal-overlay hidden"
+>
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+
+      <h2>
+        📸 Upload Bukti Misi
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="tutupModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div id="selectedMissionInfo">
+    </div>
+
+
+    <div class="upload-area">
+
+      <div class="upload-area-icon">
+        📷
+      </div>
+
+      <p>
+        Upload foto hasil pekerjaan, worksheet,
+        screenshot simulator, atau bukti lain sesuai misi.
+      </p>
+
+      <label
+        for="proofFile"
+        class="file-label"
+      >
+        📁 Pilih Foto
+      </label>
+
+      <input
+        type="file"
+        id="proofFile"
+        accept="image/*"
+        onchange="previewBukti(event)"
+      >
+
+    </div>
+
+
+    <div
+      id="previewContainer"
+      class="preview-container hidden"
+    >
+
+      <img
+        id="previewImage"
+        src=""
+        alt="Preview bukti"
+      >
+
+      <div
+        id="fileInfo"
+        class="file-info"
+      >
+      </div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn-secondary"
+        onclick="tutupModal()"
+      >
+        Batal
+      </button>
+
+      <button
+        class="btn-submit"
+        id="submitProofBtn"
+        onclick="kirimBukti()"
+        disabled
+      >
+        Kirim Bukti
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast">
+  Pesan
+</div>
+
+
+<script>
+
+/* =====================================================
+   KONFIGURASI
+===================================================== */
+
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbzyeXOYRKjgDqFSqtZUdZgy9Ohhgs5Oufb40rbNEzgFo8HrRq__QteDdeOHkCw7XE2r/exec";
+
+
+/* =====================================================
+   DATA KELAS
+===================================================== */
+
+const dataKelas = {
+
+  "X TMI": {
+
+    materials: [
+
+      {
+        judul: "Kerja Bangku",
+        deskripsi: "Dasar-dasar pekerjaan manual di bengkel Teknik Mesin."
+      },
+
+      {
+        judul: "Keselamatan Kerja",
+        deskripsi: "Penerapan K3 di lingkungan bengkel dan industri."
+      },
+
+      {
+        judul: "Pengukuran Teknik",
+        deskripsi: "Mengenal alat ukur dan teknik pengukuran."
+      },
+
+      {
+        judul: "Mesin Perkakas",
+        deskripsi: "Pengenalan mesin dan peralatan perkakas."
+      }
+
+    ],
+
+    missions: [
+
+      {
+        id: "x1",
+        judul: "Identifikasi Alat Bengkel",
+        deskripsi: "Identifikasi minimal 10 alat bengkel dan jelaskan fungsinya.",
+        poin: 50
+      },
+
+      {
+        id: "x2",
+        judul: "Keselamatan Kerja",
+        deskripsi: "Buat dokumentasi penerapan keselamatan kerja di bengkel.",
+        poin: 75
+      },
+
+      {
+        id: "x3",
+        judul: "Baca Materi Teknik Mesin",
+        deskripsi: "Pelajari materi dasar Teknik Mesin kemudian kirim bukti belajar.",
+        poin: 40
+      },
+
+      {
+        id: "x4",
+        judul: "Pengukuran Teknik",
+        deskripsi: "Lakukan praktik pengukuran menggunakan alat ukur teknik.",
+        poin: 60
+      },
+
+      {
+        id: "x5",
+        judul: "Worksheet Kerja Bangku",
+        deskripsi: "Kerjakan worksheet Kerja Bangku sesuai instruksi guru.",
+        poin: 100
+      }
+
+    ]
+
+  },
+
+
+  "XI TMI": {
+
+    materials: [
+
+      {
+        judul: "Teknik Pemesinan",
+        deskripsi: "Dasar teknik pemesinan dan proses kerja mesin."
+      },
+
+      {
+        judul: "Mesin Bubut",
+        deskripsi: "Mengenal bagian, fungsi, dan pengoperasian mesin bubut."
+      },
+
+      {
+        judul: "SKMI / PLC Simulator 2",
+        deskripsi: "Pembelajaran sistem kontrol dan simulasi PLC."
+      },
+
+      {
+        judul: "Teknik Pengelasan",
+        deskripsi: "Dasar proses dan keselamatan kerja pengelasan."
+      }
+
+    ],
+
+    missions: [
+
+      {
+        id: "xi1",
+        judul: "Pengenalan Mesin Bubut",
+        deskripsi: "Identifikasi bagian utama mesin bubut dan jelaskan fungsinya.",
+        poin: 100
+      },
+
+      {
+        id: "xi2",
+        judul: "Proses Pembubutan",
+        deskripsi: "Buat laporan atau dokumentasi proses pembubutan.",
+        poin: 100
+      },
+
+      {
+        id: "xi3",
+        judul: "SKMI / PLC Simulator 2",
+        deskripsi: "Kerjakan latihan pada SKMI / PLC Simulator 2 dan kirim screenshot hasilnya.",
+        poin: 100
+      },
+
+      {
+        id: "xi4",
+        judul: "Dasar Pengelasan",
+        deskripsi: "Pelajari dasar pengelasan dan buat dokumentasi tugas.",
+        poin: 100
+      },
+
+      {
+        id: "xi5",
+        judul: "Worksheet Teknik Mesin",
+        deskripsi: "Kerjakan worksheet Teknik Mesin sesuai instruksi.",
+        poin: 125
+      }
+
+    ]
+
+  },
+
+
+  "XII TMI": {
+
+    materials: [
+
+      {
+        judul: "Proses Produksi",
+        deskripsi: "Memahami proses produksi pada industri manufaktur."
+      },
+
+      {
+        judul: "Gambar Teknik Mesin",
+        deskripsi: "Membaca dan memahami gambar teknik mesin."
+      },
+
+      {
+        judul: "CNC Dasar",
+        deskripsi: "Dasar pemrograman dan pengoperasian CNC."
+      },
+
+      {
+        judul: "Kontrol Kualitas",
+        deskripsi: "Dasar pemeriksaan dan pengendalian kualitas produk."
+      }
+
+    ],
+
+    missions: [
+
+      {
+        id: "xii1",
+        judul: "Proses Produksi Industri",
+        deskripsi: "Buat laporan mengenai alur proses produksi industri.",
+        poin: 125
+      },
+
+      {
+        id: "xii2",
+        judul: "Membaca Gambar Teknik",
+        deskripsi: "Analisis sebuah gambar teknik mesin dan jelaskan informasi pentingnya.",
+        poin: 125
+      },
+
+      {
+        id: "xii3",
+        judul: "CNC Dasar",
+        deskripsi: "Kerjakan latihan dasar CNC dan kirim bukti hasil pekerjaan.",
+        poin: 150
+      },
+
+      {
+        id: "xii4",
+        judul: "Kontrol Kualitas",
+        deskripsi: "Buat dokumentasi proses pemeriksaan kualitas.",
+        poin: 100
+      },
+
+      {
+        id: "xii5",
+        judul: "Proyek Akhir",
+        deskripsi: "Kirim dokumentasi hasil proyek akhir Teknik Mesin Industri.",
+        poin: 200
+      }
+
+    ]
+
+  }
+
+};
+
+
+/* =====================================================
+   DATA SISWA
+===================================================== */
+
+let siswa = {
+
+  nama: "",
+  kelas: "",
+  absen: "",
+  poin: 0,
+
+  bukti: {}
+
+};
+
+
+/* =====================================================
+   VARIABEL
+===================================================== */
+
+let selectedMission = null;
+let selectedImageBase64 = null;
+let rankingData = [];
+
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
+
+function simpanLocal() {
+
+  localStorage.setItem(
+    "tmiPointSiswa",
+    JSON.stringify(siswa)
+  );
+
+}
+
+
+function ambilLocal() {
+
+  try {
+
+    const data =
+      localStorage.getItem("tmiPointSiswa");
+
+    if (!data) {
+      return false;
+    }
+
+    const parsed =
+      JSON.parse(data);
+
+    if (
+      !parsed ||
+      !parsed.nama ||
+      !parsed.kelas
+    ) {
+      return false;
+    }
+
+    siswa = {
+
+      nama: parsed.nama || "",
+      kelas: parsed.kelas || "",
+      absen: parsed.absen || "",
+      poin: Number(parsed.poin || 0),
+      bukti: parsed.bukti || {}
+
+    };
+
+    return true;
+
+  } catch (error) {
+
+    console.error(error);
+
+    return false;
+
+  }
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function mulaiBelajar() {
+
+  const nama =
+    document.getElementById("namaInput").value.trim();
+
+  const kelas =
+    document.getElementById("kelasInput").value;
+
+  const absen =
+    document.getElementById("absenInput").value.trim();
+
+
+  if (!nama) {
+
+    tampilToast("Nama lengkap harus diisi.");
+
+    return;
+
+  }
+
+
+  if (!kelas) {
+
+    tampilToast("Silakan pilih kelas.");
+
+    return;
+
+  }
+
+
+  if (!absen) {
+
+    tampilToast("Nomor absen harus diisi.");
+
+    return;
+
+  }
+
+
+  siswa.nama = nama;
+  siswa.kelas = kelas;
+  siswa.absen = absen;
+
+
+  if (!siswa.bukti) {
+    siswa.bukti = {};
+  }
+
+
+  simpanLocal();
+
+  masukApp();
+
+}
+
+
+/* =====================================================
+   MASUK APP
+===================================================== */
+
+function masukApp() {
+
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("appPage")
+    .classList.remove("hidden");
+
+
+  updateHeader();
+  renderAll();
+
+  sinkronkanData(false);
+
+}
+
+
+/* =====================================================
+   UPDATE HEADER
+===================================================== */
+
+function updateHeader() {
+
+  document.getElementById("headerNama").textContent =
+    siswa.nama;
+
+  document.getElementById("headerKelas").textContent =
+    `${siswa.kelas} • Absen ${siswa.absen}`;
+
+  document.getElementById("welcomeNama").textContent =
+    siswa.nama;
+
+  document.getElementById("welcomeKelas").textContent =
+    siswa.kelas;
+
+  document.getElementById("missionClassTitle").textContent =
+    siswa.kelas;
+
+  document.getElementById("materialClassTitle").textContent =
+    siswa.kelas;
+
+
+  document.getElementById("profileNama").textContent =
+    siswa.nama;
+
+  document.getElementById("profileKelas").textContent =
+    siswa.kelas;
+
+  document.getElementById("profileNamaInfo").textContent =
+    siswa.nama;
+
+  document.getElementById("profileKelasInfo").textContent =
+    siswa.kelas;
+
+  document.getElementById("profileAbsenInfo").textContent =
+    siswa.absen;
+
+  document.getElementById("profilePointInfo").textContent =
+    formatPoint(siswa.poin);
+
+
+  const huruf =
+    siswa.nama
+      ? siswa.nama.charAt(0).toUpperCase()
+      : "S";
+
+  document.getElementById("profileAvatar").textContent =
+    huruf;
+
+}
+
+
+/* =====================================================
+   RENDER SEMUA
+===================================================== */
+
+function renderAll() {
+
+  updatePoint();
+
+  renderMissions();
+
+  renderMaterials();
+
+  renderRankingLocal();
+
+}
+
+
+/* =====================================================
+   FORMAT POIN
+===================================================== */
+
+function formatPoint(value) {
+
+  return Number(value || 0).toLocaleString("id-ID");
+
+}
+
+
+/* =====================================================
+   UPDATE POIN
+===================================================== */
+
+function updatePoint() {
+
+  const poin =
+    Number(siswa.poin || 0);
+
+
+  document.getElementById("totalPoint").textContent =
+    formatPoint(poin);
+
+  document.getElementById("profilePointInfo").textContent =
+    formatPoint(poin);
+
+
+  const missions =
+    getMissions();
+
+  const selesai =
+    missions.filter(function(misi) {
+
+      const status =
+        siswa.bukti[misi.id]?.status;
+
+      return status === "approved";
+
+    }).length;
+
+
+  document.getElementById("missionDone").textContent =
+    selesai;
+
+
+  const level =
+    Math.max(
+      1,
+      Math.floor(poin / 250) + 1
+    );
+
+
+  const progress =
+    ((poin % 250) / 250) * 100;
+
+
+  document.getElementById("levelSiswa").textContent =
+    level;
+
+  document.getElementById("levelText").textContent =
+    `Level ${level}`;
+
+  document.getElementById("levelProgress").style.width =
+    `${progress}%`;
+
+}
+
+
+/* =====================================================
+   GET DATA KELAS
+===================================================== */
+
+function getClassData() {
+
+  return (
+    dataKelas[siswa.kelas] || {
+      materials: [],
+      missions: []
+    }
+  );
+
+}
+
+
+function getMissions() {
+
+  return getClassData().missions || [];
+
+}
+
+
+function getMaterials() {
+
+  return getClassData().materials || [];
+
+}
+
+
+/* =====================================================
+   RENDER HOME MISSION
+===================================================== */
+
+function renderHomeMissions() {
+
+  const container =
+    document.getElementById("homeMissionList");
+
+  const missions =
+    getMissions();
+
+
+  document.getElementById("homeMissionCount").textContent =
+    `${missions.length} misi`;
+
+
+  if (!missions.length) {
+
+    container.innerHTML =
+      `<div class="empty-state">
+        Belum ada misi untuk kelas ini.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    missions
+      .slice(0, 3)
+      .map(function(misi, index) {
+
+        return missionHTML(
+          misi,
+          index
+        );
+
+      })
+      .join("");
+
+}
+
+
+/* =====================================================
+   RENDER MISSION
+===================================================== */
+
+function renderMissions() {
+
+  renderHomeMissions();
+
+
+  const container =
+    document.getElementById("missionList");
+
+  const missions =
+    getMissions();
+
+
+  if (!missions.length) {
+
+    container.innerHTML =
+      `<div class="empty-state">
+        Belum ada misi untuk kelas ${escapeHTML(siswa.kelas)}.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    missions
+      .map(function(misi, index) {
+
+        return missionHTML(
+          misi,
+          index
+        );
+
+      })
+      .join("");
+
+}
+
+
+/* =====================================================
+   MISSION HTML
+===================================================== */
+
+function missionHTML(misi, index) {
+
+  const bukti =
+    siswa.bukti[misi.id];
+
+  const status =
+    bukti?.status || "";
+
+
+  let actionHTML = "";
+
+
+  if (status === "approved") {
+
+    actionHTML = `
+      <div class="status-box status-approved">
+        ✅ Misi diterima. Kamu mendapatkan ${formatPoint(misi.poin)} poin.
+      </div>
+    `;
+
+  }
+
+  else if (status === "pending") {
+
+    actionHTML = `
+      <div class="status-box status-pending">
+        ⏳ Bukti sedang menunggu verifikasi guru.
+      </div>
+    `;
+
+  }
+
+  else if (status === "rejected") {
+
+    actionHTML = `
+      <div class="status-box status-rejected">
+        ❌ Bukti ditolak.
+        ${bukti.catatan ? "<br>Catatan: " + escapeHTML(bukti.catatan) : ""}
+        <br><br>
+        <button
+          class="mission-btn"
+          onclick="bukaUpload('${misi.id}')"
+        >
+          📸 Upload Ulang
+        </button>
+      </div>
+    `;
+
+  }
+
+  else {
+
+    actionHTML = `
+      <button
+        class="mission-btn"
+        onclick="bukaUpload('${misi.id}')"
+      >
+        📸 Kirim Bukti Misi
+      </button>
+    `;
+
+  }
+
+
+  return `
+    <div class="mission-card">
+
+      <div class="mission-head">
+
+        <div class="mission-number">
+          ${index + 1}
+        </div>
+
+        <div class="mission-content">
+
+          <h3>
+            ${escapeHTML(misi.judul)}
+          </h3>
+
+          <p>
+            ${escapeHTML(misi.deskripsi)}
+          </p>
+
+        </div>
+
+        <div class="point-badge">
+          +${formatPoint(misi.poin)}
+        </div>
+
+      </div>
+
+      <div class="mission-action">
+        ${actionHTML}
+      </div>
+
+    </div>
+  `;
+
+}
+
+
+/* =====================================================
+   RENDER MATERIAL
+===================================================== */
+
+function renderMaterials() {
+
+  const container =
+    document.getElementById("materialList");
+
+  const materials =
+    getMaterials();
+
+
+  if (!materials.length) {
+
+    container.innerHTML =
+      `<div class="empty-state">
+        Belum ada materi.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    materials
+      .map(function(materi, index) {
+
+        const icons = [
+          "📘",
+          "🦺",
+          "📏",
+          "⚙️",
+          "💻",
+          "🔥"
+        ];
+
+        const icon =
+          icons[index % icons.length];
+
+
+        return `
+          <div class="material-card">
+
+            <div class="material-icon">
+              ${icon}
+            </div>
+
+            <div class="material-content">
+
+              <h3>
+                ${escapeHTML(materi.judul)}
+              </h3>
+
+              <p>
+                ${escapeHTML(materi.deskripsi)}
+              </p>
+
+            </div>
+
+          </div>
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =====================================================
+   RANKING LOCAL
+===================================================== */
+
+function renderRankingLocal() {
+
+  const container =
+    document.getElementById("rankingList");
+
+
+  if (!rankingData.length) {
+
+    container.innerHTML =
+      `<div class="empty-state">
+        Ranking akan muncul setelah data siswa tersinkron.
+      </div>`;
+
+    return;
+
+  }
+
+
+  renderRanking(rankingData);
+
+}
+
+
+/* =====================================================
+   RENDER RANKING
+===================================================== */
+
+function renderRanking(data) {
+
+  const container =
+    document.getElementById("rankingList");
+
+
+  if (!data || !data.length) {
+
+    container.innerHTML =
+      `<div class="empty-state">
+        Belum ada data ranking.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    data.map(function(item, index) {
+
+      const nama =
+        item.nama || item.name || "";
+
+      const kelas =
+        item.kelas || "";
+
+      const poin =
+        Number(
+          item.poin ??
+          item.totalPoin ??
+          item.total ??
+          0
+        );
+
+
+      const isMe =
+        normalize(nama) === normalize(siswa.nama) &&
+        normalize(kelas) === normalize(siswa.kelas);
+
+
+      let rankClass = "";
+
+      if (index === 0) {
+        rankClass = "top1";
+      }
+
+      else if (index === 1) {
+        rankClass = "top2";
+      }
+
+      else if (index === 2) {
+        rankClass = "top3";
+      }
+
+
+      return `
+        <div class="ranking-card ${isMe ? "my-ranking" : ""}">
+
+          <div class="rank-number ${rankClass}">
+            ${index + 1}
+          </div>
+
+          <div class="rank-user">
+
+            <strong>
+              ${escapeHTML(nama)}
+              ${isMe ? " 👈" : ""}
+            </strong>
+
+            <span>
+              ${escapeHTML(kelas)}
+              ${item.absen ? " • Absen " + escapeHTML(String(item.absen)) : ""}
+            </span>
+
+          </div>
+
+          <div class="rank-point">
+            ⭐ ${formatPoint(poin)}
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showSection(section) {
+
+  const sections = {
+
+    home:
+      document.getElementById("homeSection"),
+
+    mission:
+      document.getElementById("missionSection"),
+
+    material:
+      document.getElementById("materialSection"),
+
+    achievement:
+      document.getElementById("achievementSection"),
+
+    profile:
+      document.getElementById("profileSection")
+
+  };
+
+
+  Object.values(sections).forEach(function(element) {
+
+    if (element) {
+      element.classList.add("hidden");
+    }
+
+  });
+
+
+  if (sections[section]) {
+
+    sections[section]
+      .classList.remove("hidden");
+
+  }
+
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(function(button) {
+
+      button.classList.remove("active");
+
+    });
+
+
+  const navMap = {
+
+    home: "navHome",
+    mission: "navMission",
+    achievement: "navAchievement",
+    profile: "navProfile"
+
+  };
+
+
+  if (navMap[section]) {
+
+    document
+      .getElementById(navMap[section])
+      .classList.add("active");
+
+  }
+
+
+  /*
+    Materi tidak memiliki tab bawah sendiri.
+    Untuk sementara materi ditampilkan dari Beranda jika
+    fungsi ini dipanggil secara khusus.
+  */
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =====================================================
+   BUKA MATERI
+===================================================== */
+
+function bukaMateri() {
+
+  document
+    .getElementById("homeSection")
+    .classList.add("hidden");
+
+  document
+    .getElementById("missionSection")
+    .classList.add("hidden");
+
+  document
+    .getElementById("achievementSection")
+    .classList.add("hidden");
+
+  document
+    .getElementById("profileSection")
+    .classList.add("hidden");
+
+  document
+    .getElementById("materialSection")
+    .classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   UPLOAD MODAL
+===================================================== */
+
+function bukaUpload(missionId) {
+
+  const mission =
+    getMissions().find(function(item) {
+
+      return item.id === missionId;
+
+    });
+
+
+  if (!mission) {
+
+    tampilToast("Misi tidak ditemukan.");
+
+    return;
+
+  }
+
+
+  selectedMission = mission;
+  selectedImageBase64 = null;
+
+
+  document.getElementById("selectedMissionInfo").innerHTML = `
+
+    <div
+      style="
+        background:#f8fafc;
+        padding:12px;
+        border-radius:12px;
+        margin-bottom:15px;
+      "
+    >
+
+      <strong style="font-size:14px;">
+        ${escapeHTML(mission.judul)}
+      </strong>
+
+      <div
+        style="
+          font-size:11px;
+          color:#6b7280;
+          margin-top:4px;
+        "
+      >
+        Nilai misi: +${formatPoint(mission.poin)} poin
+      </div>
+
+    </div>
+
+  `;
+
+
+  document.getElementById("proofFile").value = "";
+
+  document
+    .getElementById("previewContainer")
+    .classList.add("hidden");
+
+
+  document.getElementById("submitProofBtn").disabled =
+    true;
+
+
+  document
+    .getElementById("uploadModal")
+    .classList.remove("hidden");
+
+}
+
+
+function tutupModal() {
+
+  document
+    .getElementById("uploadModal")
+    .classList.add("hidden");
+
+  selectedMission = null;
+  selectedImageBase64 = null;
+
+}
+
+
+/* =====================================================
+   PREVIEW BUKTI
+===================================================== */
+
+function previewBukti(event) {
+
+  const file =
+    event.target.files[0];
+
+
+  if (!file) {
+
+    return;
+
+  }
+
+
+  if (!file.type.startsWith("image/")) {
+
+    tampilToast("File harus berupa gambar.");
+
+    event.target.value = "";
+
+    return;
+
+  }
+
+
+  /*
+    Batas 2 MB agar upload lebih ringan.
+  */
+
+  if (file.size > 2 * 1024 * 1024) {
+
+    tampilToast(
+      "Ukuran foto maksimal 2 MB."
+    );
+
+    event.target.value = "";
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload = function(e) {
+
+    selectedImageBase64 =
+      e.target.result;
+
+
+    document.getElementById("previewImage").src =
+      selectedImageBase64;
+
+
+    document.getElementById("fileInfo").textContent =
+      `${file.name} • ${(file.size / 1024).toFixed(0)} KB`;
+
+
+    document
+      .getElementById("previewContainer")
+      .classList.remove("hidden");
+
+
+    document.getElementById("submitProofBtn").disabled =
+      false;
+
+  };
+
+
+  reader.onerror = function() {
+
+    tampilToast(
+      "Foto tidak dapat dibaca."
+    );
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   KIRIM BUKTI
+===================================================== */
+
+async function kirimBukti() {
+
+  if (!selectedMission) {
+
+    tampilToast(
+      "Misi belum dipilih."
+    );
+
+    return;
+
+  }
+
+
+  if (!selectedImageBase64) {
+
+    tampilToast(
+      "Silakan pilih foto bukti terlebih dahulu."
+    );
+
+    return;
+
+  }
+
+
+  const submitButton =
+    document.getElementById("submitProofBtn");
+
+
+  submitButton.disabled = true;
+  submitButton.textContent = "⏳ Mengirim...";
+
+
+  try {
+
+    const response =
+      await fetch(API_URL, {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body: JSON.stringify({
+
+          action: "submit",
+
+          nama: siswa.nama,
+
+          kelas: siswa.kelas,
+
+          absen: siswa.absen,
+
+          misiId: selectedMission.id,
+
+          misi: selectedMission.judul,
+
+          poin: selectedMission.poin,
+
+          image: selectedImageBase64
+
+        })
+
+      });
+
+
+    const result =
+      await response.json();
+
+
+    if (!result.success) {
+
+      throw new Error(
+        result.message ||
+        "Bukti gagal dikirim."
+      );
+
+    }
+
+
+    siswa.bukti[selectedMission.id] = {
+
+      status: "pending",
+
+      tanggal:
+        new Date().toLocaleString("id-ID"),
+
+      bukti:
+        result.url || "",
+
+      catatan: ""
+
+    };
+
+
+    simpanLocal();
+
+
+    tutupModal();
+
+    renderAll();
+
+
+    tampilToast(
+      "✅ Bukti berhasil dikirim. Menunggu verifikasi guru."
+    );
+
+
+    /*
+      Sinkronisasi ulang untuk memastikan data server
+      sudah masuk.
+    */
+
+    setTimeout(function() {
+
+      sinkronkanData(false);
+
+    }, 1500);
+
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    tampilToast(
+      "❌ Gagal mengirim bukti: " +
+      error.message
+    );
+
+  }
+
+  finally {
+
+    submitButton.disabled =
+      !selectedImageBase64;
+
+    submitButton.textContent =
+      "Kirim Bukti";
+
+  }
+
+}
+
+
+/* =====================================================
+   SINKRONISASI SERVER
+===================================================== */
+
+async function sinkronkanData(tampilkanPesan = false) {
+
+  if (
+    !siswa.nama ||
+    !siswa.kelas ||
+    !siswa.absen
+  ) {
+
+    return;
+
+  }
+
+
+  try {
+
+    /*
+      1. Ambil ranking
+    */
+
+    const rankingResponse =
+      await fetch(
+        API_URL +
+        "?action=ranking&t=" +
+        Date.now()
+      );
+
+
+    const rankingResult =
+      await rankingResponse.json();
+
+
+    if (
+      rankingResult &&
+      rankingResult.success !== false
+    ) {
+
+      let data =
+        rankingResult.data ||
+        rankingResult.ranking ||
+        rankingResult;
+
+
+      if (Array.isArray(data)) {
+
+        rankingData =
+          data;
+
+      }
+
+    }
+
+
+    /*
+      2. Cari poin siswa sendiri dari ranking.
+    */
+
+    const siswaServer =
+      rankingData.find(function(item) {
+
+        const nama =
+          item.nama ||
+          item.name ||
+          "";
+
+        const kelas =
+          item.kelas ||
+          "";
+
+        const absen =
+          item.absen == null
+            ? ""
+            : String(item.absen);
+
+
+        return (
+          normalize(nama) === normalize(siswa.nama) &&
+          normalize(kelas) === normalize(siswa.kelas) &&
+          String(absen) === String(siswa.absen)
+        );
+
+      });
+
+
+    if (siswaServer) {
+
+      siswa.poin =
+        Number(
+          siswaServer.poin ??
+          siswaServer.totalPoin ??
+          siswaServer.total ??
+          0
+        );
+
+    }
+
+
+    /*
+      3. Ambil status bukti milik siswa.
+    */
+
+    const query =
+      API_URL +
+      "?action=mySubmissions" +
+      "&nama=" +
+      encodeURIComponent(siswa.nama) +
+      "&kelas=" +
+      encodeURIComponent(siswa.kelas) +
+      "&absen=" +
+      encodeURIComponent(siswa.absen) +
+      "&t=" +
+      Date.now();
+
+
+    const submissionsResponse =
+      await fetch(query);
+
+
+    const submissionsResult =
+      await submissionsResponse.json();
+
+
+    if (
+      submissionsResult &&
+      submissionsResult.success !== false
+    ) {
+
+      const submissions =
+        submissionsResult.data ||
+        submissionsResult.submissions ||
+        [];
+
+
+      if (Array.isArray(submissions)) {
+
+        submissions.forEach(function(item) {
+
+          const missionId =
+            item.missionId ||
+            item.misiId ||
+            item.idMisi;
+
+
+          if (!missionId) {
+            return;
+          }
+
+
+          const status =
+            String(
+              item.status || ""
+            ).toUpperCase();
+
+
+          let localStatus =
+            "pending";
+
+
+          if (status === "DITERIMA") {
+
+            localStatus =
+              "approved";
+
+          }
+
+          else if (status === "DITOLAK") {
+
+            localStatus =
+              "rejected";
+
+          }
+
+          else {
+
+            localStatus =
+              "pending";
+
+          }
+
+
+          siswa.bukti[missionId] = {
+
+            status:
+              localStatus,
+
+            tanggal:
+              item.tanggal ||
+              item.date ||
+              "",
+
+            bukti:
+              item.proof ||
+              item.bukti ||
+              "",
+
+            catatan:
+              item.note ||
+              item.catatan ||
+              ""
+
+          };
+
+        });
+
+      }
+
+    }
+
+
+    simpanLocal();
+
+    updateHeader();
+    renderAll();
+
+
+    if (tampilkanPesan) {
+
+      tampilToast(
+        "🔄 Data berhasil disinkronkan."
+      );
+
+    }
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Sinkronisasi gagal:",
+      error
+    );
+
+
+    /*
+      Jangan membuat aplikasi berhenti hanya karena
+      internet/server sedang bermasalah.
+    */
+
+    if (tampilkanPesan) {
+
+      tampilToast(
+        "⚠️ Server belum dapat dihubungi. Data lokal tetap digunakan."
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+
+  const yakin =
+    confirm(
+      "Keluar dari akun siswa ini?"
+    );
+
+
+  if (!yakin) {
+
+    return;
+
+  }
+
+
+  localStorage.removeItem(
+    "tmiPointSiswa"
+  );
+
+
+  siswa = {
+
+    nama: "",
+    kelas: "",
+    absen: "",
+    poin: 0,
+    bukti: {}
+
+  };
+
+
+  rankingData = [];
+
+
+  document
+    .getElementById("appPage")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("loginPage")
+    .classList.remove("hidden");
+
+
+  document.getElementById("namaInput").value =
+    "";
+
+  document.getElementById("kelasInput").value =
+    "";
+
+  document.getElementById("absenInput").value =
+    "";
+
+
+  showSection("home");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer = null;
+
+
+function tampilToast(message) {
+
+  const toast =
+    document.getElementById("toast");
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.add("show");
+
+
+  clearTimeout(toastTimer);
+
+
+  toastTimer =
+    setTimeout(function() {
+
+      toast.classList.remove("show");
+
+    }, 3500);
+
+}
+
+
+/* =====================================================
+   NORMALIZE
+===================================================== */
+
+function normalize(value) {
+
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData() {
+
+  const berhasil =
+    ambilLocal();
+
+
+  if (!berhasil) {
+
+    return;
+
+  }
+
+
+  masukApp();
+
+}
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    loadData();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
